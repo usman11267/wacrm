@@ -78,15 +78,7 @@ function SignupPageInner() {
     },
   },
 });
-    const emailRedirectTo = inviteToken
-  ? `${window.location.origin}/join/${encodeURIComponent(inviteToken)}`
-  : `${window.location.origin}/login`;
-    options: {
-  emailRedirectTo,
-  data: {
-    full_name: fullName,
-  },
-}
+
 
     if (error) {
       setError(error.message);
