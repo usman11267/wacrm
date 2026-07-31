@@ -69,15 +69,24 @@ function SignupPageInner() {
       : undefined;
 
     const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
-        },
-        ...(emailRedirectTo ? { emailRedirectTo } : {}),
-      },
-    });
+  email,
+  password,
+  options: {
+    emailRedirectTo: `${window.location.origin}/login`,
+    data: {
+      full_name: fullName,
+    },
+  },
+});
+    const emailRedirectTo = inviteToken
+  ? `${window.location.origin}/join/${encodeURIComponent(inviteToken)}`
+  : `${window.location.origin}/login`;
+    options: {
+  emailRedirectTo,
+  data: {
+    full_name: fullName,
+  },
+}
 
     if (error) {
       setError(error.message);
